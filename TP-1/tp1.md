@@ -1,6 +1,6 @@
-I. Basics
+## I. Basics
 
-☀️ Carte réseau WiFi
+**☀️ Carte réseau WiFi**
 ```
 PS C:\Users\natha> ipconfig /all
 
@@ -10,18 +10,18 @@ Carte réseau sans fil Wi-Fi :
    Adresse IPv4. . . . . . . . . . . . . .: 10.33.73.4 // IP
    Masque de sous-réseau. . . . . . . . . : 255.255.240.0 = 14 // Masque de sous-réseau
 ```
-☀️ Déso pas déso
+**☀️ Déso pas déso**
 ```
 Adresse de Réseau du LAN : 10.33.7
 Adresse de Broadcast : 10.33.79.255
 Nombre d'Adresses IP Disponibles : 4094
 ```
-☀️ Hostname
+**☀️ Hostname**
 ```
 PS C:\Users\natha> hostname
 PC-Nathan
 ```
-☀️ Passerelle du réseau
+**☀️ Passerelle du réseau**
 ```
 PS C:\Users\natha> ipconfig /all
 
@@ -35,7 +35,7 @@ Interface : 10.33.73.4 --- 0x24
   Adresse Internet      Adresse physique            Type
   10.33.79.254          7c-5a-1c-d3-d8-76 //MAC     dynamique
 ```
-☀️ Serveur DHCP et DNS
+**☀️ Serveur DHCP et DNS**
 ```
 PS C:\Users\natha> ipconfig /all
 
@@ -45,7 +45,7 @@ Carte réseau sans fil Wi-Fi :
    Serveurs DNS. . .  . . . . . . . . . . : 8.8.8.8
                                        1.1.1.1
 ```
-☀️ Table de routage
+**☀️ Table de routage**
 ```
 PS C:\Users\natha> netstat -r
 ===========================================================================
@@ -55,9 +55,9 @@ Itinéraires actifs :
 Destination réseau    Masque réseau  Adr. passerelle   Adr. interface Métrique
           0.0.0.0          0.0.0.0     10.33.79.254       10.33.73.4     30
 ```
-II. Go further
+## II. Go further
 
-☀️ Hosts ?
+**☀️ Hosts ?**
 ```
 PS C:\Users\natha> ping b2.hello.vous
 
@@ -78,7 +78,7 @@ PS C:\Users\natha> cat C:\Windows\system32\drivers\etc\hosts
 ::1 localhost
 1.1.1.1 b2.hello.vous
 ```
-☀️ Go mater une vidéo youtube et déterminer, pendant qu'elle tourne...
+**☀️ Go mater une vidéo youtube et déterminer, pendant qu'elle tourne...**
 ```
 PS C:\Users\natha> netstat -ano
 
@@ -87,7 +87,7 @@ Connexions actives
   Proto  Adresse locale         Adresse distante       État
   TCP    10.33.73.4:63962       142.250.200.238:443    ESTABLISHED     5532
 ```
-☀️ Requêtes DNS
+**☀️ Requêtes DNS**
 ```
 PS C:\Users\natha> nslookup www.thinkerview.com
 Serveur :   dns.google
@@ -107,7 +107,7 @@ Address:  8.8.8.8
 Nom :    EAOcf-140p12.ppp15.odn.ne.jp
 Address:  143.90.88.12
 ```
-☀️ Hop hop hop
+**☀️ Hop hop hop**
 ```
 PS C:\Users\natha> tracert www.ynov.com
 
@@ -123,15 +123,15 @@ avec un maximum de 30 sauts :
   7    38 ms    16 ms    60 ms  162.158.20.240
   8    21 ms    14 ms    15 ms  172.67.74.226
 ```
-☀️ IP publique
+**☀️ IP publique**
 ```
 PS C:\Users\natha> curl ifconfig.me
 
 Content           : 195.7.117.146
 ```
-III. Le requin
+## III. Le requin
 
-☀️ Capture ARP
+**☀️ Capture ARP**
 ```
 PS C:\WINDOWS\system32> ping 10.33.79.254 // Impossible de ping
 
@@ -142,8 +142,7 @@ Délai d’attente de la demande dépassé.
 Statistiques Ping pour 10.33.79.254:
     Paquets : envoyés = 3, reçus = 0, perdus = 3 (perte 100%),
 ```
-☀️ 
-[Capture DNS](./captures/dns.pcapng)
+**☀️ [Capture DNS](./captures/dns.pcapng)**
 ```
 PS C:\WINDOWS\system32> nslookup pornhub.fr
 Serveur :   dns.google
@@ -153,5 +152,7 @@ Réponse ne faisant pas autorité :
 Nom :    pornhub.fr
 Address:  66.254.114.211
 ```
-☀️ 
-[Capture TCP](./captures/tcp.pcapng)
+**☀️ [Capture TCP](./captures/tcp.pcapng)**
+```
+C:\Users\natha>curl fr.pornhub.com
+```
