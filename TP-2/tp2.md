@@ -127,8 +127,8 @@ success
 [nanouche@web nginx]$ sudo firewall-cmd --reload
 success
 
-[nanouche@web nginx]$ sudo ss -tuln | grep :80
-tcp   LISTEN 0      511          0.0.0.0:80        0.0.0.0:*
+[nanouche@web nginx]$ sudo ss -tulnp | grep :80
+tcp   LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=1522,fd=6),("nginx",pid=1521,fd=6))
 
 [nanouche@web nginx]$ sudo firewall-cmd --list-all
 public (active)
