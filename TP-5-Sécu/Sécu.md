@@ -131,6 +131,21 @@ hugo:x:1000:1000:hugo:/home/hugo:/bin/bash
 tcpdump:x:72:72::/:/sbin/nologin
 netdata:x:991:991:NetData User:/var/log/netdata:/sbin/nologin
 
+sh-5.1# sudo ss -tuln
+sudo ss -tuln
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+udp   UNCONN 0      0          127.0.0.1:8125       0.0.0.0:*          
+udp   UNCONN 0      0          127.0.0.1:323        0.0.0.0:*          
+udp   UNCONN 0      0              [::1]:8125          [::]:*          
+udp   UNCONN 0      0              [::1]:323           [::]:*          
+tcp   LISTEN 0      128          0.0.0.0:22         0.0.0.0:*          
+tcp   LISTEN 0      4096       127.0.0.1:8125       0.0.0.0:*          
+tcp   LISTEN 0      4096         0.0.0.0:19999      0.0.0.0:*          
+tcp   LISTEN 1      1          10.0.3.15:9999       0.0.0.0:*          
+tcp   LISTEN 0      128             [::]:22            [::]:*          
+tcp   LISTEN 0      4096            [::]:19999         [::]:*          
+tcp   LISTEN 0      4096           [::1]:8125          [::]:* 
+
 sh-5.1# cat home/hugo/client.py
 cat home/hugo/client.py
 #!/usr/bin/python3.9
