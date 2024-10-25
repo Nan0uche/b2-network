@@ -166,8 +166,10 @@ jobs:
 ## 4. Bonus : DOS
 **⭐ BONUS : DOS l'application :**  
 - Sur le firewall fermer le port 9999.
-- Supprimer le dossier home/hugo ou est stocké le .py et le .conf / désinstaller Python de la machine.
-- time sleep la machine à l'infini / juste shutdown.
+- Désinstaller Python de la machine.
+- Supprimer le dossier home/hugo ou est stocké le .py et le .conf.
+- time sleep la machine.
+- Shutdown la machine.
 # II. Remédiation
 **🌞 Proposer une remédiation dév :**
 - Valider et uniquement autoriser des entrées de int ou de +-*/.
