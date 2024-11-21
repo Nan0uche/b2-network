@@ -188,7 +188,24 @@ def page_not_found(e):
 ## II. Netfilter erreurs courantes
 ### 🌞 Write-up de l'épreuve
 
+En arrivant sur le site, nous remarquons la présence d'un script situé en bas à droite de la page.
+Après avoir analysé ce script, nous découvrons qu'il contient un ensemble de règles, dont une particulièrement intéressante : 
+```bash
+IP46T -A INPUT-HTTP -m limit --limit 3/sec --limit-burst 20 -j DROP
+```
+Cette règle indique qu'il existe une limitation sur le nombre de requêtes HTTP pouvant être envoyées. Si le nombre de requêtes dépasse un certain seuil, elles seront rejetées.
+On constate que si l'on n'envoie pas assez de paquets, nos requêtes sont bloquées. L'objectif est donc d'envoyer suffisamment de requêtes pour dépasser la limite et contourner cette restriction.
+Pour ce faire, nous créons un script [spam.sh](./spam.sh) qui utilise la commande `curl` pour envoyer un grand nombre de requêtes en rafale. Le script spamme ainsi le serveur pour dépasser la limite imposée.
+Une fois le script lancé avec ./[spam.sh](./spam.sh), nous parvenons à envoyer suffisamment de requêtes pour dépasser la limite et obtenir le flag.
+
+Finalement, le flag obtenu est : saperlipopete
+
 ### 🌞 Proposer un jeu de règles firewall
+Pour même éviter le ddos, on va accepter maximum 20 paquets par secondes, puis juste après on DROP tout :
+```bash
+IP46T -A INPUT-HTTP -m limit --limit 20/sec --limit-burst 20 -j ACCEPT
+IP46T -A INPUT-HTTP -j DROP
+```
 ## III. ARP Spoofing Ecoute active
 ### 🌞 Write-up de l'épreuve
 
@@ -273,6 +290,31 @@ On configure une entrée ARP statique sur les 2 machines pour empêcher le ARP P
 ```bash
 sudo ip n add <adresse_ip> lladdr <adresse_mac> dev <interface>
 ```
-
 ### IV. Bonus : Trafic Global System for Mobile communications
 ## ⭐ BONUS : Write-up de l'épreuve
+
+L'épreuve consiste à analyser un fichier **PCAP** (Packet Capture) qui, à première vue, semble illisible. Cependant, en examinant les détails de la capture, on s'aperçoit qu'il s'agit d'une capture provenant d'un téléphone, et qu'il faut déchiffrer les données contenues dans ce fichier pour trouver un message caché.
+
+### Étapes de Décodage :
+
+1. **Téléchargement et analyse du fichier PCAP :**
+   - On commence par télécharger le fichier PCAP qui est fourni dans le cadre de l'épreuve. À l'ouverture, on constate que les données sont sous un format difficilement compréhensible. Cela peut être dû à l'encodage ou à un protocole spécifique utilisé pour la transmission des données.
+
+2. **Identification d'une trame particulière :**
+   - En analysant les différentes trames dans la capture, une trame se distingue des autres. Celle-ci a une longueur de 72 octets (length = 72), ce qui attire notre attention. Cela peut signifier qu'il y a un message caché ou un format particulier dans cette trame.
+
+3. **Décodage avec un outil en ligne :**
+   - Pour décoder cette trame, on utilise un **décodeur SMS PDU** en ligne. L'outil choisi est disponible à l'adresse suivante : [https://www.diafaan.com/sms-tutorials/gsm-modem-tutorial/online-sms-pdu-decoder/](https://www.diafaan.com/sms-tutorials/gsm-modem-tutorial/online-sms-pdu-decoder/).
+   
+4. **Format attendu pour l'analyse :**
+   - En consultant un exemple sur l'outil en ligne, on remarque que le format des données à analyser doit commencer par `0791`. Le contenu de notre trame est le suivant :
+     ```
+     00ff9c0402030201ffff0b5a0791233010210068040b917120336603f800002140206165028047c7f79b0c52bfc52c101d5d0699d9e133283d0785e764f87b6da7956bb7f82d2c8b
+     ```
+   
+5. **Décodage de la trame :**
+   - En vérifiant la trame, on remarque qu'elle commence bien par `0791`, ce qui correspond au format attendu. Nous supprimons donc tout ce qui précède ce préfixe dans le décodeur.
+   - Une fois cette modification effectuée et la trame correctement insérée dans l'outil de décodage, nous obtenons le message suivant :
+     ```
+     Good job, the flag is asdpokv4e57q7a2 !
+     ```
