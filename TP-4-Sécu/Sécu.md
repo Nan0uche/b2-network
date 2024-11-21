@@ -123,7 +123,7 @@ nanouche@Ubuntu:~$ sudo python3 icmp_exf_send.py 10.33.79.25 z
 Sent 'z' to 10.33.79.25.
 ```
 Preuve que le char 'z' a bien été envoyé à l'ip 10.33.79.25 :
-[icmp-exf-send.pcapng](.//capture/icmp-exf-send.pcapng)  
+[icmp-exf-send.pcapng](./capture/icmp-exf-send.pcapng)  
 **☀️ [icmp-exf-receive.py](./icmp-exf-receive.py)**  
 #### PC Mathéo :
 ```
