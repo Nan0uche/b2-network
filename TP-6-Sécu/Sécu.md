@@ -193,12 +193,14 @@ Après avoir analysé ce script, nous découvrons qu'il contient un ensemble de 
 ```bash
 IP46T -A INPUT-HTTP -m limit --limit 3/sec --limit-burst 20 -j DROP
 ```
-Cette règle indique qu'il existe une limitation sur le nombre de requêtes HTTP pouvant être envoyées. Si le nombre de requêtes dépasse un certain seuil, elles seront rejetées.
+Cette règle indique qu'il existe une limitation sur le nombre de requêtes HTTP pouvant être envoyées. Si le nombre de requêtes ne dépasse pas un certain seuil, elles seront rejetées.
+
 On constate que si l'on n'envoie pas assez de paquets, nos requêtes sont bloquées. L'objectif est donc d'envoyer suffisamment de requêtes pour dépasser la limite et contourner cette restriction.
+
 Pour ce faire, nous créons un script [spam.sh](./spam.sh) qui utilise la commande `curl` pour envoyer un grand nombre de requêtes en rafale. Le script spamme ainsi le serveur pour dépasser la limite imposée.
 Une fois le script lancé avec ./[spam.sh](./spam.sh), nous parvenons à envoyer suffisamment de requêtes pour dépasser la limite et obtenir le flag.
 
-Finalement, le flag obtenu est : saperlipopete
+Finalement, le flag** obtenu est : `saperlipopete`
 
 ### 🌞 Proposer un jeu de règles firewall
 Pour même éviter le ddos, on va accepter maximum 20 paquets par secondes, puis juste après on DROP tout :
